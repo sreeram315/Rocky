@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head_name %} | Add Vehicle {% endblock head_name %}
+
+
+{% block cont_ex %}<br/>
+<div class='centre-text p-3'>
+<div class="h1 pl-5">Add Vehicle</div><br/>
+
+<div class="container-fluid">
+	<div class="row pl-4">
+		<div class="col-8">
+			<form>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Brand</label>
+      <input name="brand" id="brand" type="text" class="form-control" id="inputEmail4" placeholder="Volvo">
+      <div class="invalid-tooltip" id="brand_validator"> </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Model</label>
+      <input name="model" id="model" type="text" class="form-control" id="inputPassword4" placeholder="V1">
+      <div class="invalid-tooltip" id="model_validator"> </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputCity">Reg. number.</label>
+      <input name="reg_number" id="reg_number" type="text" class="form-control" id="inputCity">
+      <div class="invalid-tooltip" id="reg_number_validator"> </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputState">Vehicle Type</label>
+      <select name="vtype" id="vtype"  id="inputState" class="form-control">
+        <option name="vtype" id="vtype"  selected>Choose...</option>
+        			<option value="0">Unicycle</option>
+					<option value="1">2 wheeler</option>
+					<option value="2">3 wheeler</option>
+					<option value="3">4 wheeler</option>
+					<option value="4">Heavy passenger motor vehicle</option>
+					<option value="5">Heavy goods motor vehicle</option>
+      </select>
+      <div class="invalid-tooltip" id="vtype_validator"> </div>
+    </div>
+
+  </div>
+  <div class="form-group">
+    <div class="form-check">
+      <input checked class="form-check-input" type="checkbox" id="gridCheck">
+      <label class="form-check-label" for="gridCheck">
+        I agree to all the term and conditions set by ROCKY Corp.
+      </label>
+    </div>
+  </div>
+  <button id="form_submit_btn" type="submit" class="btn btn-primary">Submit</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+{% endblock cont_ex %}
+</div>
+
+
+{% block js %}
+<script type="text/javascript">
+	vtype_dict = {
+		"Unicycle" 	: 0,
+		"2 wheeler" : 1,
+		"3 wheeler" : 2,
+		"4 wheeler" : 3,
+		"Heavy passenger motor vehicle" : 4,
+		"Heavy goods motor vehicle" :5
+	}
+	username = "{{user.username}}";
+	window.CSRF_TOKEN = "{{ csrf_token }}";
+
+
+	$(function(){
+		var form_data = {};
+		$('input').on("keypress", function(e){
+			console.log(e.currentTarget.name);
+	        form_data["brand"] 		= $("input[name=brand]").val();
+	        form_data["model"] 		= $("input[name=model]").val();
+	        form_data["reg_number"] = $("input[name=reg_number]").val();
+	        form_data["vtype"] 		= $("[name=vtype] option:selected").val(); 
+		})
+
+		$('#form_submit_btn').on("click", function(e){
+			
+			e.preventDefault();
+			form_data["brand"] 		= $("input[name=brand]").val();
+	        form_data["model"] 		= $("input[name=model]").val();
+	        form_data["reg_number"] = $("input[name=reg_number]").val();
+	        form_data["vtype"] 		= $("[name=vtype] option:selected").val();
+
+			submit_form(form_data);
+		})
+	})
+
+	function submit_form(form_data){
+		form_data["username"] = username;
+		form_data["csrfmiddlewaretoken"] = window.CSRF_TOKEN;
+		console.log("Submitting ", form_data);
+		$.ajax({ 
+          type: "post", 
+          url: "/vehicles/api/add-vehicle/",
+          enctype: "multipart/form-data",
+          data: form_data,
+          success: function(e) {
+            console.log('SUCCESS', e.responseText);
+            window.location = '/accounts/my-vehicles/'
+          },
+          error: function(e) {
+            console.log('FAILED', e.responseText);
+            validate_form(JSON.parse(e.responseText));
+          } 
+        });
+	}
+
+	function validate_form(obj){
+	    var fields = ["brand", 'model', 'vtype', 'reg_number']
+        for(var i=0; i < fields.length; i++){
+
+        	key = fields[i];
+        	val = obj[fields[i]];
+
+        	if (key in obj){
+        		console.log('Found', fields[i]);
+        		$(`[name=${key}]`).addClass('is-invalid');
+        		$(`#${key}_validator`).text(obj[key]);
+        	}
+        	else{
+        		console.log("NOT Found", fields[i])
+        		$(`[name=${key}]`).removeClass('is-invalid');
+        		$(`[name=${key}]`).addClass('is-valid');
+        		$(`#${key}_validator`).text("Looks good !");
+        	}
+        }
+	}
+</script>
+{% endblock js %}
+
+

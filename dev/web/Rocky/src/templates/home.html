@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head_name %} | Home {% endblock head_name %}
+
+
+{% block cont_ex %}<br/>
+<div class='centre-text p-3'>
+
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-7">
+      <div class="display-4 p-1 align_center">Welcome to project ROCKY</div>
+      <hr/>
+      <div class="apple_font align_center">
+      	AUTOMATIC TOLL COLLECTION AND GATE OPERATION USING IMAGE PROCESSING
+      </div>
+<br/>
+	<div class="pt-3"> 
+<ul>
+       <li>In this project we examine the images and the respective information of the vehicles for automating the process of toll collection and making it more efficient and perfect.
+On any toll booth the vehicle has to stop for paying the toll. But in this system, a camera is used for capturing the image of the vehicle’s number plate.</li>
+
+<br/>  <li>The captured image would be converted into text using Automatic number plate recognition system, and the toll would be cut from the customer’s account in the application we have created and the gate would be opened.</li>
+
+<br/> <li>
+Moreover in our system if a vehicle is stolen and an entry is being made in the central database by the police, then if the vehicle passes through the toll booth, then a silent alarm would buzz which would indicate the operator at the toll booth, that the vehicle is a stolen one.
+For the identification of the vehicle the information of the vehicles is already stored on the central database, so the captured number would be sent to the server received at the toll, and the server would take care of the billing.</li>
+
+<br/> <li>
+By using system we would also monitor the speed of the vehicles on the highways, by installing our system at different parts of the highway.</li>
+
+</ul>
+ 	</div>
+  	</div>
+
+    <div class="col-5 p-1 pt-5">
+     <img width="100%" src="{% static "rasp.jpg" %}"> 
+    </div>
+  </div>
+</div>
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-5">
+     	<img width="100%" class=" pl-5" style="border-radius: 10%; padding-top: 17%"  src="{% static "car_recog.jpg" %}"> 
+    </div>
+    <div class="col-7">
+     <div class="display-4 p-1 pl-3 align_center">Objectives</div> <hr/>
+
+     <div class="pl-3">
+    <ul>
+    <li>Automate the process of toll collection.</li><br/>
+	<li>Reduction of traffic congestion at the toll plaza.</li><br/>
+	<li>Reduction of man power needed in the present system.</li><br/>
+	<li>Elimination of human errors by installing a computerized system.</li><br/>
+	<li>Help police/vigilance department in monitoring the vehicle movements.</li><br/>
+	<li>Help in detecting unlawful driving actions such as not wearing helmets, seat belts, over
+speeding of vehicles etc.</li><br/>
+	<li>Digitalizing and securing payment system and record keeping.</li>
+	</ul>
+</div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container-fluid pt-5">
+  <div class="row">
+    <div class="col-5">
+      <div class="display-4  align_center apple_font">Credits</div>
+      <div style="text-align: center; columns: grey"> Conceived, Designed and Developed by: </div>
+      <hr/>
+
+  
+  
+  <div class="container-fluid pl-5">
+    <div class="row">
+      <div class="col-6">
+        <div class="card" style="width: 15rem;">
+          <img src="{% static "w.jpg" %}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Ram</h5>
+            <p class="card-text">Social animal. Animal Nonetheless.</p>
+            <button  class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">LinkedIn</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="card" style="width: 15rem;">
+          <img src="{% static "teja.jpeg" %}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Teja</h5>
+            <p class="card-text">A man of the species Homo sapiens, distinguished from other animals by superior mental development, i.e. a Human being.</p>
+            <button  class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">LinkedIn</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    </div>
+
+    <div class="col-7 p-1 pt-5">
+     <img width="100%" height="100%" src="{% static "block_diagram.png" %}"> 
+     <div class="text-monospace pr-5" style="color: grey; text-align: right;">*yada yada yada</div>
+    </div>
+  </div>
+</div>
+
+<div class="pb-5"></div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">:/</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="tc_image" style="text-align: center;">
+          <img width="100%" height="100%" src="{% static 'idhl.jpeg' %}" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="close_model_btn" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+{% endblock cont_ex %}
+</div>
+
+{% block js %}
+
+
+<script type="text/javascript">
+
+$(function(){
+ 
+
+
+});
+</script>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

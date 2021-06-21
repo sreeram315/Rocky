@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head_name %} | Accounts List {% endblock head_name %}
+
+
+{% block cont_ex %}<br/>
+
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-10 pl-5">
+			<div class="h1">Accounts list</div><br/>
+			<table class="table table-striped">
+			  <thead>
+			    <tr>
+			      <th scope="col">#</th>
+			      <th scope="col">Name</th>
+			      <th scope="col">Vehicles</th>
+			      <th scope="col">Username</th>
+			      <th scope="col">Email</th>
+			      <th scope="col">Contact</th>
+			      <th scope="col">Created on</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			  	{% for acc in accounts %}
+				    <tr>
+				      <th scope="row">{{acc.index}}</th>
+				      <td>{{acc.user.first_name}} {{acc.user.last_name}}</td>
+				       <td>0</td>
+				      <td>{{acc.user.username}}</td>
+				      <td>{{acc.email}}</td>
+				      <td>{{acc.contact_number}}</td>
+				      <td>{{acc.created_on}}</td>
+				    </tr>
+			    {% endfor %}
+			  </tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+{% endblock cont_ex %}
+</div>
+
+
+

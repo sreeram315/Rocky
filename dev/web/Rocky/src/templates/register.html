@@ -1,0 +1,291 @@
+
+
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head_name %} | Register {% endblock head_name %}
+
+
+{% block cont_ex %}<br/>
+
+
+
+<div class="container">
+	<div class="">
+<div class='centre-text p-3'>
+<div class="display-4">Register page </div><hr/> 
+
+<div class="alert alert-success" id="registration_success_message" role="alert">
+  Registration successful! Please wait while we log you in.
+</div>
+
+<div  class="alert alert-danger" id="form_validation_message" role="alert">
+  Please correct the errors.
+</div>
+
+<form method="POST" action="/register" id="registerForm" class="needs-validation" novalidate> {% csrf_token %}
+  <div class="form-row">
+    <div class="col-md-4 mb-3">
+      <label for="validationTooltip01">First name</label>
+      <input type="text" name="first_name" class="form-control" id="validationTooltip01 target"   placeholder="John" required>
+      <div class="invalid-tooltip" id="first_name_validator">
+        Looks good!
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="validationTooltip02">Last name</label>
+      <input name="last_name" type="text" class="form-control" id="validationTooltip02" placeholder="Krasinski" required>
+      <div class="invalid-tooltip" id="last_name_validator">
+        Looks good!
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="validationTooltipUsername">Username</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="validationTooltipUsernamePrepend">@</span>
+        </div>
+        <input name="username" type="text" class="form-control" id="validationTooltipUsername" placeholder="Username" aria-describedby="validationTooltipUsernamePrepend" required>
+        <div class="invalid-tooltip" id="username_validator">
+          Please choose a unique and valid username.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-6 mb-3">
+      <label for="validationTooltip03">Email</label>
+      <input name="email" type="text" class="form-control" id="validationTooltip03 username_" placeholder="email" required>
+      <div class="invalid-tooltip" id="email_validator">
+        Please provide a valid city.
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <label for="validationTooltip04">Contact number</label>
+      <input name="contact_number" type="text" class="form-control" id="validationTooltip04" placeholder="contact number" required>
+      <div class="invalid-tooltip" id="contact_number_validator">
+        Please provide a valid state.
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <label for="validationTooltip05">Password</label>
+      <input name="password" type="text" class="form-control" id="validationTooltip05 password_" placeholder="password" required>
+      <div class="invalid-tooltip" id="password_validator">
+        Please provide a valid zip.
+      </div>
+    </div>
+  </div>
+
+  <div class="form-check pb-2">
+  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+  <label class="form-check-label" for="defaultCheck1">
+    BY CHECKING THIS BOX YOU AGREE TO OUR VERY STRICT TERMS AND CONDITIONS LISTED
+      <span><button type="button" style="border: none" id="show_tac_btn" data-toggle="modal" data-target="#exampleModal">HERE</button></span>.
+  </label>
+</div>
+
+  <button  id="submitFormbtn" class="btn btn-primary" type="button">
+  		<span id="submitFormbtn2"  class=" spinner-border-sm" role="status" aria-hidden="true"></span>
+  		Register
+  </button>
+	
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Reading? Seriously?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="tc_image" style="text-align: center;">
+          <img width="100%" height="100%" src="{% static 't.jpg' %}" />
+        </div>
+        <div id="we_dont_have_tc" class="h1">
+          We dont have much of conditions honestly 😕
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="close_model_btn" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button id="insist_btn" type="button" class="btn btn-primary">Insist to read</button>
+      </div>
+    </div>
+  </div>
+</div>
+	
+</div>
+
+</form>
+</div>
+</div>
+
+
+{% endblock cont_ex %}
+</div>
+
+{% block js %}
+
+
+<script type="text/javascript">
+
+$(function(){
+	$('#form_validation_message').hide();
+	$('#registration_success_message').hide();
+  $("#we_dont_have_tc").hide()
+
+  		var form_data = {};
+  		window.CSRF_TOKEN = "{{ csrf_token }}";
+  		console.log(window.CSRF_TOKEN);
+
+  console.log("YELP!")
+   $('input').on("keypress", function(e){
+        // console.log(e.currentTarget.name);
+        form_data["first_name"] 	    = $("input[name=first_name]").val();
+        form_data["last_name"] 		    = $("input[name=last_name]").val();
+        form_data["username"] 		    = $("input[name=username]").val();
+        form_data["email"] 			      = $("input[name=email]").val();
+        form_data["contact_number"]   = $("input[name=contact_number]").val();
+        form_data["password"] 		    = $("input[name=password]").val();
+    });
+
+   	$('#submitFormbtn').on("click", function(e){
+   		// DISABLING BUTTON
+	   	$('#submitFormbtn').addClass('disabled');
+	   	$('#submitFormbtn2').addClass('spinner-border');
+   		console.log("Form submit")
+   		e.preventDefault();
+   		console.log(form_data)
+
+   		form_data["first_name"] 	= $("input[name=first_name]").val();
+        form_data["last_name"] 		= $("input[name=last_name]").val();
+        form_data["username"] 		= $("input[name=username]").val();
+        form_data["email"] 			= $("input[name=email]").val();
+        form_data["contact_number"] = $("input[name=contact_number]").val();
+        form_data["password"] 		= $("input[name=password]").val();
+   		// SENDING DATA
+
+   		$.ajax({ 
+	        type: "post", 
+	       	url: "/accounts/api/create/",
+	        enctype: "multipart/form-data",
+	        data: form_data,
+	        success: function(e) {
+	        	console.log('SUCCESS');
+	            console.log(e);
+
+	            console.log(e.responseText);
+	            $('#form_validation_message').hide();
+	            $('#registration_success_message').show();
+	            $('#submitFormbtn2').removeClass('spinner-border');	
+	            login(form_data["username"], form_data["password"]);
+
+	        },
+	        error: function(e) {
+	        	console.log('FAILED')
+	            console.log(e.responseText);
+	            obj = JSON.parse(e.responseText);
+	            $('#form_validation_message').show(); 
+
+	            var fields = ['first_name', 'last_name', 'username', 'password', 'email', 'contact_number']
+	            for(var i=0; i < fields.length; i++){
+
+	            	key = fields[i];
+	            	val = obj[fields[i]];
+
+	            	if (fields[i] in obj){
+	            		console.log('Found', fields[i]);
+	            		$(`[name=${key}]`).addClass('is-invalid');
+	            		$(`#${key}_validator`).text(obj[key]);
+	            	}
+	            	else{
+	            		console.log("NOT Found", fields[i])
+	            		$(`[name=${key}]`).removeClass('is-invalid');
+	            		$(`[name=${key}]`).addClass('is-valid');
+	            		$(`#${key}_validator`).text("Looks good !");
+	            	}
+	            }
+
+	           	$('#submitFormbtn').removeClass('disabled');
+	   			$('#submitFormbtn2').removeClass('spinner-border');	
+	        } 
+        });
+   })
+
+
+   	function login(username, password){
+   		console.log("Logging in", username, password);
+   		form_data = {
+   			"username": username,
+   			"password": password,
+   			csrfmiddlewaretoken: window.CSRF_TOKEN
+   		}
+   		setTimeout(
+			  function() 
+			  {
+			    $.ajax({ 
+		        type: "post", 
+		       	url: "/login/",
+		        enctype: "multipart/form-data",
+		        data: form_data,
+		        success: function(e) {
+		        	console.log('SUCESSFUL LOGIN')
+		        	window.location = '/';
+		        },
+		        error: function(e) {
+		        	console.log('FAILED', e.responseText)
+		        } 
+	        });
+		  }, 0);
+   		
+   	}
+
+   	function clear_form(){
+   		for(var i=0; i < fields.length; i++){
+
+        	key = fields[i];
+    		$(`[name=${key}]`).value('');
+    		$(`[name=${key}]`).removeClass('is-invalid');
+    		$(`#${key}_validator`).text(obj[key]);
+    		$(`#${key}_validator`).text("");
+    		$(`[name=${key}]`).val('');
+    		$("#registerForm")[0].reset();
+
+        }
+   	}
+
+    $("#show_tac_btn").click(function(){
+        console.log("T AND C")
+    })
+
+    $("#insist_btn").click(function(){
+        console.log("insisting :/")
+        $("#tc_image").hide()
+        $("#we_dont_have_tc").show()
+        $("#insist_btn").hide()
+    })
+
+
+});
+</script>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

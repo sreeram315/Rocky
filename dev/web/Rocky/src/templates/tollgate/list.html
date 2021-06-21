@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head_name %} | Toolgate List {% endblock head_name %}
+
+
+{% block cont_ex %}<br/>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-10 pl-5">
+			<div class="h1">Tollgate list</div><br/>
+			<table class="table table-striped">
+			  <thead>
+			    <tr>
+			      <th scope="col">#</th>
+			      <th scope="col">ID</th>
+			      <th scope="col">Name</th>
+			      <th scope="col">Area</th>
+			      <th scope="col">Latitude</th>
+			      <th scope="col">Longitude</th>
+			      <th scope="col">Min charge</th>
+			      <th scope="col">Created on</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			  	{% for t in toll_gates %}
+				    <tr>
+				      <th scope="row">{{t.index}}</th>
+				      <td>{{t.id}}</td>
+				      <td>{{t.name}}</td>
+				      <td>{{t.area}}</td>
+				      <td>{{t.latitude}}</td>
+				      <td>{{t.longitude}}</td>
+				      <td>{{t.min_charge}}</td>
+				      <td>{{t.created_on}}</td>
+				    </tr>
+			    {% endfor %}
+			  </tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+{% endblock cont_ex %}
+</div>
+
+
+
+
+

@@ -1,0 +1,14 @@
+Hello  {{user_full_name}},
+This message is in reference to the toll billing,
+
+TICKET NUMBER: {{ticket_number}},
+VEHICLE: {{vehicle.brand}} {{vehicle.model}} - {{vehicle.reg_number}},
+TOLL ENTRY: {{tollgate_in}},
+TOLL EXIT: {{tollgate_out}},
+DISTANCE: {{distance}},
+AMOUNT CHARGEABLE: {{amount}},
+UPDATED WALLET BALANCE: {{wallet_balance}}.
+
+The amount has been debited from your online wallet, please do not forget to recharge it whenever necessary to avoid cancellation of service.
+
+Thank you. Team ROCKY.

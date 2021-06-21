@@ -1,0 +1,37 @@
+SUBMISSION
+
+
+
+1. Topic name
+2. Description
+3. area of specialization
+4. nature of project (general, live, entrepreneur)
+5. novelty of project
+6. research gap
+7. project outcome(at least 2)
+
+
+
+Topic name
+- Automation of toll road charges on vehicles using Image processing.
+
+
+Description
+- The project seeks to solve the problem of heavy delay and traffic faced at the toll plaza by vehicles trying to hit the toll charged roads. 
+- It consists of an image processing system which constantly monitors and captures the images of the vehicles entering the toll road. 
+- For each vehicle, it then processes its images to retrieve the vehicle’s registration number which helps in fetching the owners billing information from our web servers.
+- As soon as the vehicle enters/leaves the toll chargeable road, a bill would be auto-generated and shared with the owner’s email and mobile number. The bill amount would be calculated by the logic we define within the server. 
+- A grace period would be mentioned for the bill to be cleared off. In failure of doing so late fee would be added to the total amount for a level-2 grace period. Further failure in paying the bill would blacklist the vehicle from using the govt roads, and on the next capture of the vehicle the information will be shared to the local road traffic authorities.
+
+
+Area of specialisation:
+- Embedded systems.
+
+
+Nature of the project:
+- Live
+
+
+Novelty of the project:
+- 
+

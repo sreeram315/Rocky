@@ -1,0 +1,272 @@
+{% load static %}
+
+<style type="text/css">
+  
+  .clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+a {
+  color: #5D6975;
+  text-decoration: underline;
+}
+
+body {
+  position: relative;
+  width: 21cm;  
+  height: 29.7cm; 
+  margin: 0 auto; 
+  color: #001028;
+  background: #FFFFFF; 
+  font-family: Arial, sans-serif; 
+  font-size: 12px; 
+  font-family: Arial;
+}
+
+header {
+  padding: 10px 0;
+  margin-bottom: 30px;
+}
+
+#logo {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+#logo img {
+  width: 90px;
+}
+
+h1 {
+  border-top: 1px solid  #5D6975;
+  border-bottom: 1px solid  #5D6975;
+  color: #5D6975;
+  font-size: 2.4em;
+  line-height: 1.4em;
+  font-weight: normal;
+  text-align: center;
+  margin: 0 0 20px 0;
+  background: url({% static 'dimension.png' %});
+}
+
+#project {
+  float: left;
+}
+
+#project span {
+  color: #5D6975;
+  text-align: right;
+  width: 52px;
+  margin-right: 10px;
+  display: inline-block;
+  font-size: 0.8em;
+}
+
+#company {
+  float: right;
+  text-align: right;
+}
+
+#project div,
+#company div {
+  white-space: nowrap;        
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 20px;
+}
+
+table tr:nth-child(2n-1) td {
+  background: #F5F5F5;
+}
+
+table th,
+table td {
+  text-align: center;
+}
+
+table th {
+  padding: 5px 20px;
+  color: #5D6975;
+  border-bottom: 1px solid #C1CED9;
+  white-space: nowrap;        
+  font-weight: normal;
+}
+
+table .service,
+table .desc {
+  text-align: left;
+}
+
+table td {
+  padding: 20px;
+  text-align: right;
+}
+
+table td.service,
+table td.desc {
+  vertical-align: top;
+}
+
+table td.unit,
+table td.qty,
+table td.total {
+  font-size: 1.2em;
+}
+
+table td.grand {
+  border-top: 1px solid #5D6975;;
+}
+
+#notices .notice {
+  color: #5D6975;
+  font-size: 1.2em;
+}
+
+footer {
+  color: #5D6975;
+  width: 100%;
+  height: 30px;
+  position: absolute;
+  bottom: 0;
+  border-top: 1px solid #C1CED9;
+  padding: 8px 0;
+  text-align: center;
+}
+</style>
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>INVOICE</title>
+    <link rel="stylesheet" href="style.css" media="all" />
+  </head>
+  <body>
+    <header class="clearfix">
+      <div id="logo">
+        <img style="width: 20%" src="{% static 'logo.png' %}">
+      </div>
+      <h1>INVOICE {{obj.ticket_number}}</h1>
+      <div id="company" class="clearfix">
+        <div>ROCKY Corporation.</div>
+        <div>607, Street no.3 <br />Towli Chowki, Hyderabad<br /> TS 500070, IND</div>
+        <div>+91 (891)9937557</div>
+        <div><a href="mailto:queries.rocky@gmail.com">queries.rocky@gmail.com</a></div>
+      </div>
+      <div id="project">
+        <div><span>CUSTOMER</span> {{obj.vehicle.user.first_name}} {{obj.vehicle.user.last_name}}</div>
+        <div><span>VEHICLE</span> {{obj.vehicle.brand}} {{obj.vehicle.model}}</div>
+        <div><span>REG</span> {{obj.vehicle.reg_number}}</div>
+        <div><span>EMAIL</span> <a href="mailto:{{obj.vehicle.user.email}}">{{obj.vehicle.user.email}}</a></div>
+        <div><span>DATE</span> {{obj.created_on.date}}</div>
+        <div><span>DUE DATE</span> {{due_date}}</div>
+      </div>
+    </header>
+
+
+
+    <main >
+      <table >
+        <thead>
+          <tr>
+            <th class="service">TOLLGATE PLAZA</th>
+            <th class="desc">TOLL TYPE</th>
+            <th>DATE</th>
+            <th>TIME</th>
+          </tr>
+        </thead>
+        <tbody >
+          <tr>
+            <td class="service">{{obj.tollgate_in.tollgate.name}}</td>
+            <td class="desc">ENTRY</td>
+            <td class="unit">{{obj.tollgate_in.created_on.date}}</td>
+            <td class="qty">{{obj.tollgate_in.created_on.time}}</td>
+          </tr>
+          <tr>
+            <td class="service">{{obj.tollgate_out.tollgate.name}}</td>
+            <td class="desc">EXIT</td>
+            <td class="unit">{{obj.tollgate_out.created_on.date}}</td>
+            <td class="qty">{{obj.tollgate_out.created_on.time}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+
+<br/>
+
+
+
+
+    <main>
+      <table>
+        <thead>
+          <tr>
+            <th class="service">ATTRIBUTE</th>
+            <th class="desc">VALUE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="service">TICKET NUMBER</td>
+            <td class="desc">{{obj.ticket_number}}</td>
+          </tr>
+
+          <tr>
+            <td class="service">TRANSACTION ID</td>
+            <td class="desc">{{obj.transaction.transaction_id}}</td>
+          </tr>
+
+          <tr>
+            <td class="service">DISTANCE COVERED</td>
+            <td class="desc">{{obj.distance}} meters</td>
+          </tr>
+
+          <tr>
+            <td colspan="4">AMOUNT</td>
+            <td class="total">{{amount}}</td>
+          </tr>
+
+
+
+          <tr>
+            <td colspan="4">GST 14%</td>
+            <td class="total">{{tax}}</td>
+          </tr>
+
+          <tr>
+            <td colspan="4" class="grand total">GRAND TOTAL</td>
+            <td class="grand total">{{gtotal}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div id="notices">
+        <div>NOTICE:</div>
+        <div class="notice">A finance charge of 1.5% will be made on unpaid balances after 40 days.</div>
+      </div>
+    </main>
+    <footer>
+      Invoice was created on a computer and is valid without the signature and seal.
+    </footer>
+  </body>
+</html>
+
+
+<script type="text/javascript">
+  $(function(){
+    console.log("YELLo")
+  })
+</script>
+
+
+
+
+
+
+

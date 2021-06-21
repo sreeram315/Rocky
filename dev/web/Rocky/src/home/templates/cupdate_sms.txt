@@ -1,0 +1,22 @@
+KARONA UPDATE on {{TODAY_DATE}}:
+YESTERDAY's:
+
+CONFIRMED: :/
+Total: {{TOTAL_CONFIRMED}}
+Telangana: {{TOTAL_CONFIRMED_TS}}
+Top3:
+{{today_confirmed.0.0|upper}} - {{today_confirmed.0.1}}, {{today_confirmed.1.0|upper}} - {{today_confirmed.1.1}}, {{today_confirmed.2.0|upper}} - {{today_confirmed.2.1}}.
+
+RECOVERED: :)
+Total: {{TOTAL_RECOVERED}}
+Telangana: {{TOTAL_RECOVERED_TS}}
+Top3:
+{{today_recovered.0.0|upper}} - {{today_recovered.0.1}}, {{today_recovered.1.0|upper}} - {{today_recovered.1.1}}, {{today_recovered.2.0|upper}} - {{today_recovered.2.1}}.
+
+DESEASED: :(
+Total: {{TOTAL_DECEASED}}
+Telangana: {{TOTAL_DECEASED_TS}}
+Top3:
+{{today_deceased.0.0|upper}} - {{today_deceased.0.1}}, {{today_deceased.1.0|upper}} - {{today_deceased.1.1}}, {{today_deceased.2.0|upper}} - {{today_deceased.2.1}}
+
+[Send 'PLEASE STOP' to God to unsubscribe]

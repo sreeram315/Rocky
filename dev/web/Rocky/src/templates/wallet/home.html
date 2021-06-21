@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head_name %} | Wallet | Home {% endblock head_name %}
+
+
+{% block cont_ex %}
+
+<div class='centre-text p-3'>
+
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-6 vertical_line pl-5 pt-3">
+			<div class="h1 apple_font pb-0">Wallet Balance: {{user.userprofile.wallet_balance}}</div><div class="pl-3 pr-3"><hr/></div><br/><br/>
+			<div class="h3 pl-3 apple_font ">
+				Add Money
+			</div>
+
+			<form>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-5">
+				  <div class="form-group row">
+				    <div class="col-sm-12">
+				      <input class="form-control" id="amount" placeholder="How much ?">
+				    </div>
+				  </div>
+				</div>
+				<div class="col-4"><button class="btn btn-primary" id="add_money_btn"> Add</button></div>
+				</div>
+			</div>
+
+			</form>
+
+		</div>
+
+		<div class="col-6 pl-5 pt-3">
+			<div class="h1 apple_font pb-0">Transactions</div>
+			<div class="container-fluid">
+			<div class="row">
+				<div class="col-12">
+					<table class="table table-striped">
+					  <thead>
+					    <tr>
+					      <th scope="col">#</th>
+					      <th scope="col">Amount</th>
+					      <th scope="col">T-Type</th>
+					      <th scope="col">Date</th>
+					      <th scope="col">Time</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					  	{% for t in transactions %}
+						    <tr>
+						      <th scope="row">{{t.index}}</th>
+						      {% if not t.is_credit %}<td style="color: red">{{t.amount}}</td>{% endif %}
+						      {% if t.is_credit %}<td style="color: green">{{t.amount}}</td>{% endif %}
+						      <td>{{t.ttype}}</td>
+						      <td>{{t.created_on.date}}</td>
+						      <td>{{t.created_on.time}}</td>
+						    </tr>
+					    {% endfor %}
+					  </tbody>
+					</table>
+				</div>
+			</div>
+</div>
+		</div>
+	</div>
+</div>
+
+
+
+</div>
+{% endblock cont_ex %}
+
+{% block js %}
+<script type="text/javascript">
+	$(function(){
+		$("#add_money_btn").on('click', function(e){
+			$("#add_money_btn").addClass("disabled");
+			e.preventDefault();
+			amount = $("#amount").val();
+			console.log("adding money", amount);
+			form_data = {
+							"username": "{{user.username}}",
+							"amount": amount,
+							csrfmiddlewaretoken: "{{ csrf_token }}"
+						}
+			$.ajax({ 
+		        type: "post", 
+		       	url: "/accounts/api/wallet/add-money/",
+		        enctype: "multipart/form-data",
+		        data: form_data,
+		        success: function(e) {
+		        	console.log('SUCCESS', e.responseText);
+		        	window.location.reload();
+
+		        },
+		        error: function(e) {
+		        	console.log('FAILED', e.responseText)
+		        }
+			});
+			$("#add_money_btn").removeClass("disabled");
+		})
+	})
+</script>
+{% endblock js %}
+
+
+
+

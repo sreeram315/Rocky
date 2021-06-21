@@ -1,0 +1,27 @@
+<script type="text/javascript">
+    setTimeout(function(){
+   window.location.replace("/");
+}, 2000)
+</script>
+
+{% extends 'base.html' %}
+{% block head_name %} | Login {% endblock head_name %}
+
+{% block cont_ex %}
+{% if not user.is_authnticated %}
+
+<div class="display-4 apple_font align_center pt-5">
+Wrong username or password. <br/>Redirecting to login...
+</div>
+
+{% endif %}
+{% endblock cont_ex %}
+
+
+
+
+
+
+
+
+

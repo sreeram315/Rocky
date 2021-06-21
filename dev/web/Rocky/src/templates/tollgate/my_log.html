@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head_name %} | My Tollgate log {% endblock head_name %}
+
+
+{% block cont_ex %}<br/>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-10 pl-5">
+			<div class="h1">My Tollgate log</div><br/>
+			<table class="table table-striped">
+			  <thead>
+			    <tr>
+			      <th scope="col">#</th>
+			      <th scope="col">Tollgate</th>
+			      <th scope="col">Vehicle</th>
+			      <th scope="col">Toll type</th>
+			      <th scope="col">Date</th>
+			      <th scope="col">Time</th>
+			      <th scope="col">Created on</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			  	{% for t in toll_gate_log %}
+				    <tr>
+				      <th scope="row">{{t.index}}</th>
+				      <td>{{t.tollgate}}</td>
+				      <td>{{t.vehicle}}</td>
+				      <td>{{t.ttype}}</td>
+				      <td>{{t.date}}</td>
+				      <td>{{t.time}}</td>
+				      <td>{{t.created_on}}</td>
+				    </tr>
+			    {% endfor %}
+			  </tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+{% endblock cont_ex %}
+</div>
+
+
+
+
+
